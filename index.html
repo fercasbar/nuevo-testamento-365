@@ -9,40 +9,44 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #f5f1e8;
-    text-align: center;
-    padding: 20px;
+    background:#f5f1e8;
+    text-align:center;
+    padding:20px;
 }
 
 .contenedor {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
+    max-width:600px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
 }
 
 h1 {
-    color: #7b4b2a;
+    color:#7b4b2a;
+}
+
+.dia {
+    font-size:28px;
+    font-weight:bold;
 }
 
 .lectura {
-    font-size: 20px;
-    margin: 20px 0;
+    font-size:22px;
+    margin:20px;
 }
 
 .boton {
-    display: inline-block;
-    background: #1b6ca8;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 10px;
-    text-decoration: none;
+    background:#1b6ca8;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+    text-decoration:none;
 }
 
 .frase {
-    margin-top: 30px;
-    font-style: italic;
+    margin-top:30px;
+    font-style:italic;
 }
 </style>
 
@@ -54,30 +58,63 @@ h1 {
 
 <h1>Nuevo Testamento en 365 días</h1>
 
-<h2>Día 1</h2>
+<div id="contenido"></div>
 
-<div class="lectura">
-Mateo 1:1-25
+<div class="frase">
+"Jesús es el camino, la verdad y la vida"
 </div>
 
-<p>
-Lectura del día:
-<br><br>
-Libro de Mateo. 
-Comenzamos nuestro recorrido leyendo la vida y obra de nuestro Señor Jesucristo.
-</p>
+</div>
 
-<a class="boton" href="https://www.biblegateway.com/passage/?search=Mateo%201%3A1-25&version=RVR1960" target="_blank">
+
+<script>
+
+const lecturas = [
+
+{
+dia:1,
+texto:"Mateo 1:1-22",
+link:"https://www.biblegateway.com/passage/?search=Mateo%201%3A1-22&version=RVR1960"
+},
+
+{
+dia:2,
+texto:"Mateo 1:23 - Mateo 2:22",
+link:"https://www.biblegateway.com/passage/?search=Mateo%201%3A23-2%3A22&version=RVR1960"
+},
+
+{
+dia:3,
+texto:"Mateo 3:1-17",
+link:"https://www.biblegateway.com/passage/?search=Mateo%203%3A1-17&version=RVR1960"
+}
+
+];
+
+
+let diaActual = 1;
+
+let lectura = lecturas.find(x => x.dia === diaActual);
+
+
+document.getElementById("contenido").innerHTML = `
+
+<div class="dia">
+Día ${lectura.dia}
+</div>
+
+<div class="lectura">
+📖 ${lectura.texto}
+</div>
+
+<a class="boton" href="${lectura.link}" target="_blank">
 Leer Biblia RVR1960
 </a>
 
-<div class="frase">
-“Jesús es el camino, la verdad y la vida”
-</div>
+`;
 
-</div>
+</script>
+
 
 </body>
 </html>
-
-Luego:
