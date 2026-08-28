@@ -139,11 +139,26 @@ console.assert(lecturas.length === 365, "El plan debe tener exactamente 365 día
 // PRUEBAS:
 // Puedes abrir cualquier día agregando ?dia= al enlace del Hub.
 // Ejemplo: .../nuevo-testamento-365/?dia=5
-const parametros = new URLSearchParams(window.location.search);
-let diaActual = parseInt(parametros.get("dia") || "1", 10);
+const fechaInicio = new Date(2026, 7, 28); // 28 agosto 2026
 
-if (!Number.isInteger(diaActual) || diaActual < 1 || diaActual > 365) {
+const hoy = new Date();
+
+fechaInicio.setHours(0, 0, 0, 0);
+hoy.setHours(0, 0, 0, 0);
+
+const diferenciaMilisegundos = hoy - fechaInicio;
+const diferenciaDias = Math.floor(
+    diferenciaMilisegundos / (1000 * 60 * 60 * 24)
+);
+
+let diaActual = diferenciaDias + 1;
+
+if (diaActual < 1) {
     diaActual = 1;
+}
+
+if (diaActual > 365) {
+    diaActual = 365;
 }
 
 const lectura = lecturas.find(x => x.dia === diaActual);
