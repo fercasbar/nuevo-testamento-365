@@ -91,38 +91,80 @@ const lecturas = [
   {
     dia: 8,
     texto: "Mateo 6:25-34 y Mateo 7:1-12",
-    links: [
+    secciones: [
       {
-        texto: "LEER MATEO 6:25-34",
+        titulo: "Mateo 6",
+        inicio: "25",
+        fin: "34",
         url: "https://www.bible.com/es-ES/bible/149/MAT.6.RVR1960"
       },
       {
-        texto: "CONTINUAR CON MATEO 7:1-12",
+        titulo: "Mateo 7",
+        inicio: "1",
+        fin: "12",
         url: "https://www.bible.com/es-ES/bible/149/MAT.7.RVR1960"
       }
     ]
   }
 ];
 
-let diaActual = 1;
+let diaActual = 8;
 
 let lectura = lecturas.find(x => x.dia === diaActual);
 
-let botones = "";
+let contenidoBotones = "";
 
-if (lectura.links) {
+if (lectura.secciones) {
 
-  botones = lectura.links.map(enlace => `
-    <div style="margin:25px 0;">
-      <a class="boton" href="${enlace.url}" target="_blank">
-        ${enlace.texto}
+  contenidoBotones = lectura.secciones.map((seccion, index) => `
+    <div style="
+      margin:25px 0;
+      padding:18px;
+      border:1px solid #ddd;
+      border-radius:12px;
+      background:#fafafa;
+    ">
+
+      <div style="
+        font-size:20px;
+        font-weight:bold;
+        margin-bottom:10px;
+      ">
+        ${index === 0 ? "PRIMERA PARTE" : "SEGUNDA PARTE"}
+      </div>
+
+      <div style="
+        font-size:19px;
+        margin-bottom:8px;
+      ">
+        📖 ${seccion.titulo}
+      </div>
+
+      <div style="
+        font-size:17px;
+        margin-bottom:6px;
+      ">
+        Empiece en el versículo <strong>${seccion.inicio}</strong>
+      </div>
+
+      <div style="
+        font-size:18px;
+        font-weight:bold;
+        margin-bottom:18px;
+      ">
+        ✅ TERMINE EN EL VERSÍCULO ${seccion.fin}
+      </div>
+
+      <a class="boton" href="${seccion.url}" target="_blank">
+        ${index === 0 ? "LEER ESTA PARTE" : "CONTINUAR LECTURA"}
       </a>
+
     </div>
   `).join("");
 
 } else {
 
-  botones = `
+  contenidoBotones = `
     <a class="boton" href="${lectura.link}" target="_blank">
       LEER LA LECTURA DE HOY
     </a>
@@ -139,7 +181,7 @@ Día ${lectura.dia}
 📖 ${lectura.texto}
 </div>
 
-${botones}
+${contenidoBotones}
 
 `;
 
