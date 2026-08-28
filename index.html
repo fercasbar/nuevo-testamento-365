@@ -89,85 +89,46 @@ const lecturas = [
   },
 
   {
-    dia: 8,
-    texto: "Mateo 6:25-34 y Mateo 7:1-12",
-    secciones: [
-      {
-        titulo: "Mateo 6",
-        inicio: "25",
-        fin: "34",
-        url: "https://www.bible.com/es-ES/bible/149/MAT.6.RVR1960"
-      },
-      {
-        titulo: "Mateo 7",
-        inicio: "1",
-        fin: "12",
-        url: "https://www.bible.com/es-ES/bible/149/MAT.7.RVR1960"
-      }
-    ]
+    dia: 4,
+    texto: "Mateo 4:1-25",
+    link: "https://www.bible.com/es-ES/bible/149/MAT.4.RVR1960"
+  },
+
+  {
+    dia: 5,
+    texto: "Mateo 5:1-24",
+    link: "https://www.bible.com/es-ES/bible/149/MAT.5.RVR1960",
+    aviso: "Lee desde el versículo 1 hasta el versículo 24"
+  },
+
+  {
+    dia: 6,
+    texto: "Mateo 5:25-48",
+    link: "https://www.bible.com/es-ES/bible/149/MAT.5.RVR1960",
+    aviso: "Continúa desde el versículo 25 hasta el versículo 48"
   }
 ];
 
-let diaActual = 8;
+let diaActual = 5;
 
 let lectura = lecturas.find(x => x.dia === diaActual);
 
-let contenidoBotones = "";
+let avisoLectura = "";
 
-if (lectura.secciones) {
-
-  contenidoBotones = lectura.secciones.map((seccion, index) => `
+if (lectura.aviso) {
+  avisoLectura = `
     <div style="
-      margin:25px 0;
-      padding:18px;
-      border:1px solid #ddd;
-      border-radius:12px;
-      background:#fafafa;
+      margin: 15px auto 25px;
+      padding: 14px;
+      max-width: 430px;
+      background: #fff8e8;
+      border: 2px solid #d6a84b;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
     ">
-
-      <div style="
-        font-size:20px;
-        font-weight:bold;
-        margin-bottom:10px;
-      ">
-        ${index === 0 ? "PRIMERA PARTE" : "SEGUNDA PARTE"}
-      </div>
-
-      <div style="
-        font-size:19px;
-        margin-bottom:8px;
-      ">
-        📖 ${seccion.titulo}
-      </div>
-
-      <div style="
-        font-size:17px;
-        margin-bottom:6px;
-      ">
-        Empiece en el versículo <strong>${seccion.inicio}</strong>
-      </div>
-
-      <div style="
-        font-size:18px;
-        font-weight:bold;
-        margin-bottom:18px;
-      ">
-        ✅ TERMINE EN EL VERSÍCULO ${seccion.fin}
-      </div>
-
-      <a class="boton" href="${seccion.url}" target="_blank">
-        ${index === 0 ? "LEER ESTA PARTE" : "CONTINUAR LECTURA"}
-      </a>
-
+      📌 ${lectura.aviso}
     </div>
-  `).join("");
-
-} else {
-
-  contenidoBotones = `
-    <a class="boton" href="${lectura.link}" target="_blank">
-      LEER LA LECTURA DE HOY
-    </a>
   `;
 }
 
@@ -181,7 +142,11 @@ Día ${lectura.dia}
 📖 ${lectura.texto}
 </div>
 
-${contenidoBotones}
+${avisoLectura}
+
+<a class="boton" href="${lectura.link}" target="_blank">
+LEER LA LECTURA DE HOY
+</a>
 
 `;
 
