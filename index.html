@@ -83,16 +83,51 @@ const lecturas = [
   },
 
   {
-  dia: 3,
-  texto: "Mateo 3:1-17",
-  link: "https://www.bible.com/es-ES/bible/149/MAT.3.RVR1960"
-}
+    dia: 3,
+    texto: "Mateo 3:1-17",
+    link: "https://www.bible.com/es-ES/bible/149/MAT.3.RVR1960"
+  },
+
+  {
+    dia: 8,
+    texto: "Mateo 6:25-34 y Mateo 7:1-12",
+    links: [
+      {
+        texto: "LEER MATEO 6:25-34",
+        url: "https://www.bible.com/es-ES/bible/149/MAT.6.25-34.RVR1960"
+      },
+      {
+        texto: "CONTINUAR CON MATEO 7:1-12",
+        url: "https://www.bible.com/es-ES/bible/149/MAT.7.1-12.RVR1960"
+      }
+    ]
+  }
 ];
 
-let diaActual = 3;
+let diaActual = 8;
 
 let lectura = lecturas.find(x => x.dia === diaActual);
 
+let botones = "";
+
+if (lectura.links) {
+
+  botones = lectura.links.map(enlace => `
+    <div style="margin:25px 0;">
+      <a class="boton" href="${enlace.url}" target="_blank">
+        ${enlace.texto}
+      </a>
+    </div>
+  `).join("");
+
+} else {
+
+  botones = `
+    <a class="boton" href="${lectura.link}" target="_blank">
+      LEER LA LECTURA DE HOY
+    </a>
+  `;
+}
 
 document.getElementById("contenido").innerHTML = `
 
@@ -104,14 +139,11 @@ Día ${lectura.dia}
 📖 ${lectura.texto}
 </div>
 
-<a class="boton" href="${lectura.link}" target="_blank">
-LEER LA LECTURA DE HOY
-</a>
+${botones}
 
 `;
 
 </script>
-
 
 </body>
 </html>
