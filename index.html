@@ -80,118 +80,537 @@ h1 {
 
 <script>
 
-// PLAN DEFINITIVO: 365 días.
-// Regla: capítulos de 30 versículos o menos se leen completos.
-// Los de más de 30 se dividen aproximadamente por la mitad.
-// Cinco capítulos de 31 versículos se leen completos para cerrar exactamente en 365 días.
+// =====================================================
+// PLAN DEFINITIVO: NUEVO TESTAMENTO EN 365 DÍAS
+// =====================================================
+//
+// Regla:
+// - Capítulos de 30 versículos o menos se leen completos.
+// - Los de más de 30 versículos se dividen aproximadamente por la mitad.
+// - Cinco capítulos de 31 versículos se leen completos
+//   para cerrar exactamente en 365 días.
+//
+// Fecha oficial de inicio:
+// 1 de septiembre de 2026
+// =====================================================
 
-const libros = [{"nombre": "Mateo", "codigo": "MAT", "capitulos": [25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36, 39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20]}, {"nombre": "Marcos", "codigo": "MRK", "capitulos": [45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20]}, {"nombre": "Lucas", "codigo": "LUK", "capitulos": [80, 52, 38, 44, 39, 49, 50, 56, 62, 42, 54, 59, 35, 35, 32, 31, 37, 43, 48, 47, 38, 71, 56, 53]}, {"nombre": "Juan", "codigo": "JHN", "capitulos": [51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57, 50, 38, 31, 27, 33, 26, 40, 42, 31, 25]}, {"nombre": "Hechos", "codigo": "ACT", "capitulos": [26, 47, 26, 37, 42, 15, 60, 40, 43, 48, 30, 25, 52, 28, 41, 40, 34, 28, 41, 38, 40, 30, 35, 27, 27, 32, 44, 31]}, {"nombre": "Romanos", "codigo": "ROM", "capitulos": [32, 29, 31, 25, 21, 23, 25, 39, 33, 21, 36, 21, 14, 23, 33, 27]}, {"nombre": "1 Corintios", "codigo": "1CO", "capitulos": [31, 16, 23, 21, 13, 20, 40, 13, 27, 33, 34, 31, 13, 40, 58, 24]}, {"nombre": "2 Corintios", "codigo": "2CO", "capitulos": [24, 17, 18, 18, 21, 18, 16, 24, 15, 18, 33, 21, 14]}, {"nombre": "Gálatas", "codigo": "GAL", "capitulos": [24, 21, 29, 31, 26, 18]}, {"nombre": "Efesios", "codigo": "EPH", "capitulos": [23, 22, 21, 32, 33, 24]}, {"nombre": "Filipenses", "codigo": "PHP", "capitulos": [30, 30, 21, 23]}, {"nombre": "Colosenses", "codigo": "COL", "capitulos": [29, 23, 25, 18]}, {"nombre": "1 Tesalonicenses", "codigo": "1TH", "capitulos": [10, 20, 13, 18, 28]}, {"nombre": "2 Tesalonicenses", "codigo": "2TH", "capitulos": [12, 17, 18]}, {"nombre": "1 Timoteo", "codigo": "1TI", "capitulos": [20, 15, 16, 16, 25, 21]}, {"nombre": "2 Timoteo", "codigo": "2TI", "capitulos": [18, 26, 17, 22]}, {"nombre": "Tito", "codigo": "TIT", "capitulos": [16, 15, 15]}, {"nombre": "Filemón", "codigo": "PHM", "capitulos": [25]}, {"nombre": "Hebreos", "codigo": "HEB", "capitulos": [14, 18, 19, 16, 14, 20, 28, 13, 28, 39, 40, 29, 25]}, {"nombre": "Santiago", "codigo": "JAS", "capitulos": [27, 26, 18, 17, 20]}, {"nombre": "1 Pedro", "codigo": "1PE", "capitulos": [25, 25, 22, 19, 14]}, {"nombre": "2 Pedro", "codigo": "2PE", "capitulos": [21, 22, 18]}, {"nombre": "1 Juan", "codigo": "1JN", "capitulos": [10, 29, 24, 21, 21]}, {"nombre": "2 Juan", "codigo": "2JN", "capitulos": [13]}, {"nombre": "3 Juan", "codigo": "3JN", "capitulos": [14]}, {"nombre": "Judas", "codigo": "JUD", "capitulos": [25]}, {"nombre": "Apocalipsis", "codigo": "REV", "capitulos": [20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21]}];
 
-const capitulos31Completos = new Set(["Hechos|28", "Juan|14", "Juan|20", "Lucas|16", "Romanos|3"]);
+const libros = [
+    {
+        "nombre": "Mateo",
+        "codigo": "MAT",
+        "capitulos": [
+            25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36,
+            39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20
+        ]
+    },
+    {
+        "nombre": "Marcos",
+        "codigo": "MRK",
+        "capitulos": [
+            45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20
+        ]
+    },
+    {
+        "nombre": "Lucas",
+        "codigo": "LUK",
+        "capitulos": [
+            80, 52, 38, 44, 39, 49, 50, 56, 62, 42, 54, 59,
+            35, 35, 32, 31, 37, 43, 48, 47, 38, 71, 56, 53
+        ]
+    },
+    {
+        "nombre": "Juan",
+        "codigo": "JHN",
+        "capitulos": [
+            51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57,
+            50, 38, 31, 27, 33, 26, 40, 42, 31, 25
+        ]
+    },
+    {
+        "nombre": "Hechos",
+        "codigo": "ACT",
+        "capitulos": [
+            26, 47, 26, 37, 42, 15, 60, 40, 43, 48, 30, 25, 52, 28,
+            41, 40, 34, 28, 41, 38, 40, 30, 35, 27, 27, 32, 44, 31
+        ]
+    },
+    {
+        "nombre": "Romanos",
+        "codigo": "ROM",
+        "capitulos": [
+            32, 29, 31, 25, 21, 23, 25, 39, 33, 21, 36, 21, 14, 23, 33, 27
+        ]
+    },
+    {
+        "nombre": "1 Corintios",
+        "codigo": "1CO",
+        "capitulos": [
+            31, 16, 23, 21, 13, 20, 40, 13, 27, 33, 34, 31, 13, 40, 58, 24
+        ]
+    },
+    {
+        "nombre": "2 Corintios",
+        "codigo": "2CO",
+        "capitulos": [
+            24, 17, 18, 18, 21, 18, 16, 24, 15, 18, 33, 21, 14
+        ]
+    },
+    {
+        "nombre": "Gálatas",
+        "codigo": "GAL",
+        "capitulos": [
+            24, 21, 29, 31, 26, 18
+        ]
+    },
+    {
+        "nombre": "Efesios",
+        "codigo": "EPH",
+        "capitulos": [
+            23, 22, 21, 32, 33, 24
+        ]
+    },
+    {
+        "nombre": "Filipenses",
+        "codigo": "PHP",
+        "capitulos": [
+            30, 30, 21, 23
+        ]
+    },
+    {
+        "nombre": "Colosenses",
+        "codigo": "COL",
+        "capitulos": [
+            29, 23, 25, 18
+        ]
+    },
+    {
+        "nombre": "1 Tesalonicenses",
+        "codigo": "1TH",
+        "capitulos": [
+            10, 20, 13, 18, 28
+        ]
+    },
+    {
+        "nombre": "2 Tesalonicenses",
+        "codigo": "2TH",
+        "capitulos": [
+            12, 17, 18
+        ]
+    },
+    {
+        "nombre": "1 Timoteo",
+        "codigo": "1TI",
+        "capitulos": [
+            20, 15, 16, 16, 25, 21
+        ]
+    },
+    {
+        "nombre": "2 Timoteo",
+        "codigo": "2TI",
+        "capitulos": [
+            18, 26, 17, 22
+        ]
+    },
+    {
+        "nombre": "Tito",
+        "codigo": "TIT",
+        "capitulos": [
+            16, 15, 15
+        ]
+    },
+    {
+        "nombre": "Filemón",
+        "codigo": "PHM",
+        "capitulos": [
+            25
+        ]
+    },
+    {
+        "nombre": "Hebreos",
+        "codigo": "HEB",
+        "capitulos": [
+            14, 18, 19, 16, 14, 20, 28, 13, 28, 39, 40, 29, 25
+        ]
+    },
+    {
+        "nombre": "Santiago",
+        "codigo": "JAS",
+        "capitulos": [
+            27, 26, 18, 17, 20
+        ]
+    },
+    {
+        "nombre": "1 Pedro",
+        "codigo": "1PE",
+        "capitulos": [
+            25, 25, 22, 19, 14
+        ]
+    },
+    {
+        "nombre": "2 Pedro",
+        "codigo": "2PE",
+        "capitulos": [
+            21, 22, 18
+        ]
+    },
+    {
+        "nombre": "1 Juan",
+        "codigo": "1JN",
+        "capitulos": [
+            10, 29, 24, 21, 21
+        ]
+    },
+    {
+        "nombre": "2 Juan",
+        "codigo": "2JN",
+        "capitulos": [
+            13
+        ]
+    },
+    {
+        "nombre": "3 Juan",
+        "codigo": "3JN",
+        "capitulos": [
+            14
+        ]
+    },
+    {
+        "nombre": "Judas",
+        "codigo": "JUD",
+        "capitulos": [
+            25
+        ]
+    },
+    {
+        "nombre": "Apocalipsis",
+        "codigo": "REV",
+        "capitulos": [
+            20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19,
+            17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21
+        ]
+    }
+];
+
+
+// =====================================================
+// CINCO CAPÍTULOS DE 31 VERSÍCULOS QUE SE LEEN COMPLETOS
+// =====================================================
+
+const capitulos31Completos = new Set([
+    "Hechos|28",
+    "Juan|14",
+    "Juan|20",
+    "Lucas|16",
+    "Romanos|3"
+]);
+
+
+// =====================================================
+// GENERACIÓN AUTOMÁTICA DE LAS 365 LECTURAS
+// =====================================================
 
 const lecturas = [];
+
 let numeroDia = 1;
 
 libros.forEach(libro => {
-    libro.capitulos.forEach((totalVersiculos, indice) => {
-        const capitulo = indice + 1;
-        const clave = `${libro.nombre}|${capitulo}`;
-        const link = `https://www.bible.com/es-ES/bible/149/${libro.codigo}.${capitulo}.RVR1960`;
 
-        if (totalVersiculos <= 30 || capitulos31Completos.has(clave)) {
+    libro.capitulos.forEach((totalVersiculos, indice) => {
+
+        const capitulo = indice + 1;
+
+        const clave = `${libro.nombre}|${capitulo}`;
+
+        const link =
+            `https://www.bible.com/es-ES/bible/149/${libro.codigo}.${capitulo}.RVR1960`;
+
+
+        // Capítulo completo
+        if (
+            totalVersiculos <= 30 ||
+            capitulos31Completos.has(clave)
+        ) {
+
             lecturas.push({
                 dia: numeroDia++,
                 libro: libro.nombre,
-                capitulo,
+                capitulo: capitulo,
                 inicio: 1,
                 fin: totalVersiculos,
                 dividido: false,
-                link
+                link: link
             });
-        } else {
+
+        }
+
+        // Capítulo dividido
+        else {
+
             const corte = Math.ceil(totalVersiculos / 2);
 
             lecturas.push({
                 dia: numeroDia++,
                 libro: libro.nombre,
-                capitulo,
+                capitulo: capitulo,
                 inicio: 1,
                 fin: corte,
                 dividido: true,
-                link
+                link: link
             });
 
             lecturas.push({
                 dia: numeroDia++,
                 libro: libro.nombre,
-                capitulo,
+                capitulo: capitulo,
                 inicio: corte + 1,
                 fin: totalVersiculos,
                 dividido: true,
-                link
+                link: link
             });
+
         }
+
     });
+
 });
 
-console.assert(lecturas.length === 365, "El plan debe tener exactamente 365 días");
 
-// PRUEBAS:
-// Puedes abrir cualquier día agregando ?dia= al enlace del Hub.
-// Ejemplo: .../nuevo-testamento-365/?dia=5
-const fechaInicio = new Date(2026, 7, 28); // 28 agosto 2026
-
-const hoy = new Date();
-
-fechaInicio.setHours(0, 0, 0, 0);
-hoy.setHours(0, 0, 0, 0);
-
-const diferenciaMilisegundos = hoy - fechaInicio;
-const diferenciaDias = Math.floor(
-    diferenciaMilisegundos / (1000 * 60 * 60 * 24)
+// Verificación interna
+console.assert(
+    lecturas.length === 365,
+    "ERROR: El plan debe tener exactamente 365 días"
 );
 
-let diaActual = diferenciaDias + 1;
 
-if (diaActual < 1) {
-    diaActual = 1;
+// =====================================================
+// FECHA OFICIAL DEL INICIO
+// =====================================================
+//
+// JavaScript cuenta los meses desde 0:
+// Enero = 0
+// Febrero = 1
+// ...
+// Septiembre = 8
+//
+// Por eso septiembre aparece como mes 8.
+// =====================================================
+
+const FECHA_INICIO = {
+    anio: 2026,
+    mes: 8,
+    dia: 1
+};
+
+const MILISEGUNDOS_DIA =
+    24 * 60 * 60 * 1000;
+
+
+// =====================================================
+// CALCULAR AUTOMÁTICAMENTE EL DÍA DEL PLAN
+// =====================================================
+
+function obtenerDiaAutomatico() {
+
+    const hoy = new Date();
+
+    const hoyUTC = Date.UTC(
+        hoy.getFullYear(),
+        hoy.getMonth(),
+        hoy.getDate()
+    );
+
+    const inicioUTC = Date.UTC(
+        FECHA_INICIO.anio,
+        FECHA_INICIO.mes,
+        FECHA_INICIO.dia
+    );
+
+    const diferencia =
+        hoyUTC - inicioUTC;
+
+    return Math.floor(
+        diferencia / MILISEGUNDOS_DIA
+    ) + 1;
 }
 
-if (diaActual > 365) {
-    diaActual = 365;
+
+// =====================================================
+// MODO NORMAL + MODO DE PRUEBA
+// =====================================================
+//
+// En funcionamiento normal:
+// NO se agrega nada al enlace.
+//
+// Para hacer pruebas manuales:
+// ?dia=1
+// ?dia=32
+// ?dia=365
+//
+// Ejemplo:
+// https://TU-ENLACE.github.io/.../?dia=32
+// =====================================================
+
+const parametros =
+    new URLSearchParams(window.location.search);
+
+const parametroDia =
+    parametros.get("dia");
+
+let diaActual;
+
+let modoPrueba = false;
+
+
+// Si se especifica manualmente ?dia=
+if (parametroDia !== null) {
+
+    const diaPrueba =
+        parseInt(parametroDia, 10);
+
+    if (
+        Number.isInteger(diaPrueba) &&
+        diaPrueba >= 1 &&
+        diaPrueba <= 365
+    ) {
+
+        diaActual = diaPrueba;
+
+        modoPrueba = true;
+
+    }
+
+    else {
+
+        diaActual =
+            obtenerDiaAutomatico();
+
+    }
+
 }
 
-const lectura = lecturas.find(x => x.dia === diaActual);
+else {
 
-const textoLectura = `${lectura.libro} ${lectura.capitulo}:${lectura.inicio}-${lectura.fin}`;
+    diaActual =
+        obtenerDiaAutomatico();
 
-let avisoLectura = "";
+}
 
-if (lectura.dividido) {
-    avisoLectura = `
-        <div class="aviso">
-            📌 LECTURA DE HOY: versículos ${lectura.inicio} al ${lectura.fin}
+
+// =====================================================
+// MOSTRAR CONTENIDO
+// =====================================================
+
+const contenido =
+    document.getElementById("contenido");
+
+
+// =====================================================
+// ANTES DEL 1 DE SEPTIEMBRE DE 2026
+// =====================================================
+
+if (
+    !modoPrueba &&
+    diaActual < 1
+) {
+
+    contenido.innerHTML = `
+
+        <div class="dia">
+            Comenzamos el 1 de septiembre de 2026
         </div>
+
+        <div class="lectura">
+            📖 Día 1: Mateo 1:1-25
+        </div>
+
     `;
+
 }
 
-document.getElementById("contenido").innerHTML = `
 
-<div class="dia">
-Día ${lectura.dia}
-</div>
+// =====================================================
+// DESPUÉS DEL DÍA 365
+// =====================================================
 
-<div class="lectura">
-📖 ${textoLectura}
-</div>
+else if (
+    !modoPrueba &&
+    diaActual > 365
+) {
 
-${avisoLectura}
+    contenido.innerHTML = `
 
-<a class="boton" href="${lectura.link}" target="_blank">
-LEER LA LECTURA DE HOY
-</a>
+        <div class="dia">
+            ¡Plan completado!
+        </div>
 
-`;
+        <div class="lectura">
+            📖 Hemos terminado el Nuevo Testamento en 365 días.
+        </div>
+
+    `;
+
+}
+
+
+// =====================================================
+// LECTURA DEL DÍA
+// =====================================================
+
+else {
+
+    const lectura =
+        lecturas[diaActual - 1];
+
+    const textoLectura =
+        `${lectura.libro} ${lectura.capitulo}:${lectura.inicio}-${lectura.fin}`;
+
+
+    let avisoLectura = "";
+
+
+    // Si el capítulo está dividido,
+    // se indica claramente hasta dónde leer.
+    if (lectura.dividido) {
+
+        avisoLectura = `
+
+            <div class="aviso">
+
+                📌 LECTURA DE HOY:
+                versículos ${lectura.inicio} al ${lectura.fin}
+
+            </div>
+
+        `;
+
+    }
+
+
+    contenido.innerHTML = `
+
+        <div class="dia">
+            Día ${lectura.dia}
+        </div>
+
+        <div class="lectura">
+            📖 ${textoLectura}
+        </div>
+
+        ${avisoLectura}
+
+        <a
+            class="boton"
+            href="${lectura.link}"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            LEER LA LECTURA DE HOY
+        </a>
+
+    `;
+
+}
 
 </script>
 
